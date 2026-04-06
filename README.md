@@ -1,18 +1,21 @@
 # ReMarket — Second-hand Trading Platform
 
-COMP7640 Group 6 Database Project
+**COMP7640 Group 6 | Database Project**
+
+A multi-vendor, multi-customer e-commerce platform for second-hand goods, built with Python and MySQL. Supports vendor management, product management, fuzzy tag search, order placement, and order modification.
 
 ---
 
 ## 1. Environment Requirements
 
-| Requirement | Version |
-|-------------|---------|
-| Python      | 3.8+    |
-| MySQL       | 8.0+    |
-| PyMySQL     | latest  |
+| Requirement | Version  |
+|-------------|----------|
+| Python      | 3.8+     |
+| MySQL       | 8.0+     |
+| PyMySQL     | latest   |
 
-Install PyMySQL:
+Install the required Python package:
+
 ```bash
 pip install pymysql
 ```
@@ -21,7 +24,7 @@ pip install pymysql
 
 ## 2. Database Configuration
 
-Open `code/Backend/db.py` and edit the `DB_CONFIG` dictionary:
+Open `code/Backend/db.py` and update `DB_CONFIG` with your MySQL credentials:
 
 ```python
 DB_CONFIG = {
@@ -30,7 +33,8 @@ DB_CONFIG = {
     "user":     "root",
     "password": "your_password_here",   # <-- change this
     "database": "remarket",
-    ...
+    "charset":  "utf8mb4",
+    "cursorclass": pymysql.cursors.DictCursor,
 }
 ```
 
@@ -38,7 +42,7 @@ DB_CONFIG = {
 
 ## 3. Database Setup
 
-Run the SQL script to create the database, tables, and sample data:
+Run `code/group6_insert_sql.txt` to create the database, all tables, constraints, and sample data.
 
 **Option A — MySQL command line:**
 ```bash
@@ -48,22 +52,40 @@ mysql -u root -p < code/group6_insert_sql.txt
 **Option B — MySQL Workbench / DBeaver:**
 Open `code/group6_insert_sql.txt` and execute the entire file.
 
-This will create the `remarket` database with 6 tables:
-- `Vendor`, `Product`, `Customer`, `Order`, `OrderItem`, `Transaction`
+This creates the `remarket` database with 6 tables and the following sample data:
 
-And insert sample data:
-- 5 vendors, 15 products, 3 customers, 5 orders, transaction records
+| Table       | Sample Rows |
+|-------------|-------------|
+| Vendor      | 5           |
+| Product     | 15          |
+| Customer    | 3           |
+| Order       | 5           |
+| OrderItem   | 9           |
+| Transaction | 6           |
+
+To reset the database to its original state, re-run the same SQL file (it drops and recreates all tables automatically).
 
 ---
 
 ## 4. How to Run
+
+### Option A — Graphical Interface (GUI)
+
+```bash
+cd code/Frontend
+python gui.py
+```
+
+A window will open with 5 tabs covering all functional points.
+
+### Option B — Command-line Interface (CLI)
 
 ```bash
 cd code/Frontend
 python main.py
 ```
 
-The CLI menu will appear:
+The following menu will appear:
 
 ```
 ========================================
@@ -82,18 +104,43 @@ The CLI menu will appear:
 
 ---
 
-## 5. Feature Overview
+## 5. Implemented Features
 
-| Feature | Menu Option | Description |
-|---------|-------------|-------------|
-| List vendors | 1 → 1 | Show all vendors |
-| Add vendor | 1 → 2 | Register a new vendor |
-| Browse products | 2 → 1 | View products by vendor |
-| Add product | 2 → 2 | Add product to a vendor |
-| Search by tag | 3 | Fuzzy search by keyword |
-| Place order | 4 | Select customer, add items, confirm |
-| Delete item | 5 → 1 | Remove one product from a pending order |
-| Cancel order | 5 → 2 | Cancel a pending order and restore stock |
+### ① Vendor Management
+| Action | GUI | CLI |
+|--------|-----|-----|
+| List all vendors | Vendors tab → Refresh | Menu 1 → 1 |
+| Add new vendor | Vendors tab → Add Vendor | Menu 1 → 2 |
+
+### ② Product Management
+| Action | GUI | CLI |
+|--------|-----|-----|
+| Browse products by vendor | Products tab → select vendor → Browse | Menu 2 → 1 |
+| Add new product for a vendor | Products tab → fill form → Add Product | Menu 2 → 2 |
+
+### ③ Product Search (fuzzy LIKE matching)
+| Action | GUI | CLI |
+|--------|-----|-----|
+| Search by keyword (matches product name OR tags) | Search tab → enter keyword → Search | Menu 3 |
+
+> Note: search uses SQL `LIKE %keyword%` — not exact matching.
+
+### ④ Purchase (Place Order)
+| Action | GUI | CLI |
+|--------|-----|-----|
+| Select customer, add items to cart, confirm order | Purchase tab | Menu 4 |
+
+- Stock is validated before order is confirmed
+- If items span multiple vendors, one Transaction record is created per vendor
+
+### ⑤ Order Modification
+| Action | GUI | CLI |
+|--------|-----|-----|
+| Delete a specific product from a pending order | Order Modify tab → Load Order → Delete Selected Item | Menu 5 → 1 |
+| Cancel entire order (pending orders only) | Order Modify tab → Load Order → Cancel Entire Order | Menu 5 → 2 |
+
+- Cancelling an order restores stock and removes all related Transaction records
+- Shipped orders cannot be cancelled
 
 ---
 
@@ -101,16 +148,28 @@ The CLI menu will appear:
 
 ```
 COMP7640 Group_Project/
+├── README.md
 ├── code/
+│   ├── group6_insert_sql.txt      # CREATE TABLE + sample data SQL
 │   ├── Backend/
-│   │   ├── db.py           # Database connection
-│   │   ├── vendor.py       # Vendor DAO
-│   │   ├── product.py      # Product DAO
-│   │   ├── customer.py     # Customer DAO
-│   │   ├── order.py        # Order DAO
-│   │   └── transaction.py  # Transaction DAO
-│   ├── Frontend/
-│   │   └── main.py         # CLI entry point
-│   └── group6_insert_sql.txt
-└── README.md
+│   │   ├── db.py                  # MySQL connection (edit password here)
+│   │   ├── vendor.py              # Vendor DAO — list, add
+│   │   ├── product.py             # Product DAO — browse, add, search
+│   │   ├── customer.py            # Customer DAO — list, add
+│   │   ├── order.py               # Order DAO — place, delete item, cancel
+│   │   └── transaction.py         # Transaction DAO — create, delete
+│   └── Frontend/
+│       ├── gui.py                 # GUI entry point (tkinter)
+│       └── main.py                # CLI entry point
+└── E-R Diagram.pdf
 ```
+
+---
+
+## 7. Demo Checklist
+
+The following must be demonstrated during the project demo:
+
+- [ ] **Search** — enter a keyword, verify fuzzy results appear
+- [ ] **Place Order** — select customer, add products to cart, confirm
+- [ ] **Modify Order** — delete an item from a pending order, or cancel the entire order
