@@ -1,0 +1,162 @@
+-- ============================================================
+-- ReMarket: Second-hand Trading Platform
+-- group6_insert_sql.txt
+-- Run this file to create all tables and insert sample data
+-- ============================================================
+
+-- Create and select database
+CREATE DATABASE IF NOT EXISTS remarket CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE remarket;
+
+-- ============================================================
+-- DROP TABLES (in reverse FK order for clean re-run)
+-- ============================================================
+DROP TABLE IF EXISTS Transaction;
+DROP TABLE IF EXISTS OrderItem;
+DROP TABLE IF EXISTS `Order`;
+DROP TABLE IF EXISTS Product;
+DROP TABLE IF EXISTS Customer;
+DROP TABLE IF EXISTS Vendor;
+
+-- ============================================================
+-- CREATE TABLES
+-- ============================================================
+
+CREATE TABLE Vendor (
+    vendor_id         INT          PRIMARY KEY AUTO_INCREMENT,
+    business_name     VARCHAR(100) NOT NULL,
+    average_rating    DECIMAL(3,2) DEFAULT 0.00,
+    geographical_presence VARCHAR(100)
+);
+
+CREATE TABLE Product (
+    product_id    INT           PRIMARY KEY AUTO_INCREMENT,
+    product_name  VARCHAR(150)  NOT NULL,
+    price         DECIMAL(10,2) NOT NULL,
+    stock_quantity INT           NOT NULL DEFAULT 0,
+    tags          VARCHAR(255),
+    vendor_id     INT           NOT NULL,
+    FOREIGN KEY (vendor_id) REFERENCES Vendor(vendor_id)
+);
+
+CREATE TABLE Customer (
+    customer_id      INT          PRIMARY KEY AUTO_INCREMENT,
+    contact_number   VARCHAR(20),
+    shipping_address VARCHAR(200)
+);
+
+CREATE TABLE `Order` (
+    order_id    INT           PRIMARY KEY AUTO_INCREMENT,
+    order_date  DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    total_price DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+    status      VARCHAR(20)   NOT NULL DEFAULT 'pending',
+    customer_id INT           NOT NULL,
+    FOREIGN KEY (customer_id) REFERENCES Customer(customer_id)
+);
+
+CREATE TABLE OrderItem (
+    order_id   INT           NOT NULL,
+    product_id INT           NOT NULL,
+    quantity   INT           NOT NULL,
+    unit_price DECIMAL(10,2) NOT NULL,
+    PRIMARY KEY (order_id, product_id),
+    FOREIGN KEY (order_id)   REFERENCES `Order`(order_id),
+    FOREIGN KEY (product_id) REFERENCES Product(product_id)
+);
+
+CREATE TABLE Transaction (
+    transaction_id INT           PRIMARY KEY AUTO_INCREMENT,
+    amount         DECIMAL(10,2) NOT NULL,
+    payment_date   DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    order_id       INT           NOT NULL,
+    vendor_id      INT           NOT NULL,
+    FOREIGN KEY (order_id)  REFERENCES `Order`(order_id),
+    FOREIGN KEY (vendor_id) REFERENCES Vendor(vendor_id)
+);
+
+-- ============================================================
+-- SAMPLE DATA
+-- ============================================================
+
+-- Vendors (5)
+INSERT INTO Vendor (business_name, average_rating, geographical_presence) VALUES
+('TechSecondHand',    4.80, 'Hong Kong'),
+('BookNook',          4.50, 'Kowloon'),
+('FashionReuse',      4.20, 'New Territories'),
+('HomeGoods Hub',     4.60, 'Hong Kong'),
+('SportGear Resale',  4.30, 'Kowloon');
+
+-- Products (15, 3 per vendor)
+INSERT INTO Product (product_name, price, stock_quantity, tags, vendor_id) VALUES
+-- Vendor 1: TechSecondHand
+('iPhone 13 (Used)',         2800.00, 5, 'electronics,phone,apple,mobile',    1),
+('MacBook Air M1 (Refurb)',  5500.00, 3, 'electronics,laptop,apple,computer', 1),
+('Sony WH-1000XM4 Headphones', 900.00, 8, 'electronics,audio,headphones',    1),
+-- Vendor 2: BookNook
+('Introduction to Algorithms', 120.00, 10, 'book,textbook,computer science,algorithms', 2),
+('Clean Code',                  80.00, 15, 'book,textbook,programming,software',         2),
+('The Great Gatsby (Vintage)', 30.00,  20, 'book,fiction,classic,novel',                 2),
+-- Vendor 3: FashionReuse
+('Vintage Denim Jacket',       350.00, 6, 'fashion,jacket,vintage,clothing',  3),
+('Leather Handbag',            220.00, 4, 'fashion,bag,leather,accessories',  3),
+('Adidas Sneakers Size 42',    280.00, 9, 'fashion,shoes,sneakers,sportswear',3),
+-- Vendor 4: HomeGoods Hub
+('IKEA KALLAX Shelf Unit',     400.00, 3, 'furniture,shelf,home,storage',     4),
+('Dyson V8 Vacuum (Used)',     950.00, 2, 'home,appliance,vacuum,cleaning',   4),
+('Coffee Maker De Longhi',     480.00, 5, 'home,appliance,kitchen,coffee',    4),
+-- Vendor 5: SportGear Resale
+('Trek Mountain Bike 29"',    2200.00, 2, 'sports,bike,cycling,outdoor',      5),
+('Yoga Mat Premium',           90.00, 12, 'sports,yoga,fitness,exercise',     5),
+('Tennis Racket Wilson Pro',  320.00,  7, 'sports,tennis,racket,outdoor',     5);
+
+-- Customers (3)
+INSERT INTO Customer (contact_number, shipping_address) VALUES
+('60001111', '12 Nathan Road, Kowloon, HK'),
+('60002222', '8 Harbour Road, Wan Chai, HK'),
+('60003333', '55 Queens Road, Central, HK');
+
+-- Orders (5)
+INSERT INTO `Order` (order_date, total_price, status, customer_id) VALUES
+('2025-03-01 10:00:00', 3700.00, 'shipped',   1),
+('2025-03-05 14:30:00',  200.00, 'shipped',   2),
+('2025-03-10 09:15:00', 1230.00, 'pending',   3),
+('2025-03-15 16:00:00',  570.00, 'pending',   1),
+('2025-03-20 11:45:00', 2200.00, 'cancelled', 2);
+
+-- OrderItems
+INSERT INTO OrderItem (order_id, product_id, quantity, unit_price) VALUES
+-- Order 1: iPhone + MacBook (both from Vendor 1)
+(1, 1, 1, 2800.00),
+(1, 2, 1, 5500.00),
+-- Order 2: Clean Code + Gatsby (both from Vendor 2)
+(2, 5, 1, 80.00),
+(2, 6, 4, 30.00),
+-- Order 3: Headphones (Vendor 1) + Denim Jacket (Vendor 3)
+(3, 3, 1, 900.00),
+(3, 7, 1, 350.00),
+-- Order 4: Sneakers (Vendor 3) + Yoga Mat (Vendor 5)
+(4, 9, 1, 280.00),
+(4, 14, 1, 90.00),
+-- Order 5 (cancelled): Mountain Bike (Vendor 5)
+(5, 13, 1, 2200.00);
+
+-- Transactions (one per vendor per order, for non-cancelled orders)
+-- Order 1: Vendor 1 gets full amount
+INSERT INTO Transaction (amount, payment_date, order_id, vendor_id) VALUES
+(3700.00, '2025-03-01 10:01:00', 1, 1);
+
+-- Order 2: Vendor 2 gets full amount
+INSERT INTO Transaction (amount, payment_date, order_id, vendor_id) VALUES
+(200.00, '2025-03-05 14:31:00', 2, 2);
+
+-- Order 3: two vendors
+INSERT INTO Transaction (amount, payment_date, order_id, vendor_id) VALUES
+(900.00, '2025-03-10 09:16:00', 3, 1),
+(350.00, '2025-03-10 09:16:00', 3, 3);
+
+-- Order 4: two vendors
+INSERT INTO Transaction (amount, payment_date, order_id, vendor_id) VALUES
+(280.00, '2025-03-15 16:01:00', 4, 3),
+(90.00,  '2025-03-15 16:01:00', 4, 5);
+
+-- Order 5 is cancelled — no Transaction rows
