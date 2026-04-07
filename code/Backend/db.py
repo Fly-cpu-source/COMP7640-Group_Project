@@ -8,7 +8,7 @@ DB_CONFIG = {
     "host":     "localhost",
     "port":     3306,
     "user":     "root",
-    "password": "123456",   # change to your MySQL password
+    "password": "123456",        # TODO: change to your MySQL root password
     "database": "remarket",
     "charset":  "utf8mb4",
     "cursorclass": pymysql.cursors.DictCursor,

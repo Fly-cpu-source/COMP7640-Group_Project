@@ -24,19 +24,13 @@ pip install pymysql
 
 ## 2. Database Configuration
 
-Open `code/Backend/db.py` and update `DB_CONFIG` with your MySQL credentials:
+Open the file `code/Backend/db.py` in any text editor (Notepad, VS Code, etc.) and change **only the password field** on line 9 to your own MySQL root password:
 
 ```python
-DB_CONFIG = {
-    "host":     "localhost",
-    "port":     3306,
-    "user":     "root",
-    "password": "your_password_here",   # <-- change this
-    "database": "remarket",
-    "charset":  "utf8mb4",
-    "cursorclass": pymysql.cursors.DictCursor,
-}
+"password": "your_password_here",   # <-- change this line only
 ```
+
+Everything else (host, port, user, database name) can stay as-is if you are running MySQL locally with the default settings.
 
 ---
 
