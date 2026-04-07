@@ -48,8 +48,9 @@ Run `code/group6_insert_sql.txt` to create the database, all tables, constraints
 "C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe" -u root -p < code\group6_insert_sql.txt
 ```
 
-**Option C — PowerShell:**
+**Option C — PowerShell** (run from project root directory):
 ```powershell
+cd "C:\Users\26764\Desktop\COMP7640 Group_Project"
 Get-Content "code\group6_insert_sql.txt" | & "C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe" -u root -p
 ```
 
