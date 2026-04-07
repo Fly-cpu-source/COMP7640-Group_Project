@@ -38,13 +38,20 @@ Everything else (host, port, user, database name) can stay as-is if you are runn
 
 Run `code/group6_insert_sql.txt` to create the database, all tables, constraints, and sample data.
 
-**Option A — MySQL command line:**
-```bash
-mysql -u root -p < code/group6_insert_sql.txt
+**Option A — MySQL Workbench (recommended):**
+1. Open MySQL Workbench
+2. File → Open SQL Script → select `code/group6_insert_sql.txt`
+3. Press `Ctrl+Shift+Enter` to execute all
+
+**Option B — Command Prompt (cmd.exe, NOT PowerShell):**
+```cmd
+"C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe" -u root -p < code\group6_insert_sql.txt
 ```
 
-**Option B — MySQL Workbench / DBeaver:**
-Open `code/group6_insert_sql.txt` and execute the entire file.
+**Option C — PowerShell:**
+```powershell
+Get-Content "code\group6_insert_sql.txt" | & "C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe" -u root -p
+```
 
 This creates the `remarket` database with 6 tables and the following sample data:
 
