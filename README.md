@@ -24,7 +24,7 @@ pip install pymysql
 
 ## 2. Database Configuration
 
-Open the file `code/Backend/db.py` in any text editor (Notepad, VS Code, etc.) and change **only the password field** on line 9 to your own MySQL root password:
+Open the file `code/Backend/db.py` in any text editor (Notepad, VS Code, etc.) and change **only the password field** on line 11 to your own MySQL root password:
 
 ```python
 "password": "your_password_here",   # <-- change this line only
@@ -43,12 +43,12 @@ Run `code/group6_insert_sql.txt` to create the database, all tables, constraints
 2. File → Open SQL Script → select `code/group6_insert_sql.txt`
 3. Press `Ctrl+Shift+Enter` to execute all
 
-**Option B — Command Prompt (cmd.exe, NOT PowerShell):**
+**Option B — Command Prompt (cmd.exe, NOT PowerShell, Please make sure to change it to the file path on your own computer):**
 ```cmd
 "C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe" -u root -p < code\group6_insert_sql.txt
 ```
 
-**Option C — PowerShell** (run from project root directory):
+**Option C — PowerShell** (run from project root directory, Please make sure to change it to the file path on your own computer):
 ```powershell
 cd "C:\Users\26764\Desktop\COMP7640 Group_Project"
 Get-Content "code\group6_insert_sql.txt" | & "C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe" -u root -p
