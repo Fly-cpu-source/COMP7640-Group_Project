@@ -132,6 +132,8 @@ The following menu will appear:
 | Search by keyword (matches product name OR tags) | Search tab → enter keyword → Search | Menu 3 |
 
 > Note: search uses SQL `LIKE %keyword%` — not exact matching.
+> 
+> Keywords list: electronics, phone, apple, mobile, laptop, computer, audio, headphones, book, textbook, science, algorithms, programming, software, fiction, classic, novel, fashion, jacket, vintage, clothing, bag, leather, accessories, shoes, sneakers, sportswear, furniture, shelf, home, storage, vacuum, cleaning, appliance, kitchen, coffee, sports, bike, cycling, yoga, fitness, exercise, tennis, racket, outdoor
 
 ### ④ Purchase (Place Order)
 | Action | GUI | CLI |
