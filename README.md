@@ -37,18 +37,24 @@ Everything else (host, port, user, database name) can stay as-is if you are runn
 ## 3. Database Setup
 
 Run `code/group6_insert_sql.txt` to create the database, all tables, constraints, and sample data.
+```diff
+- Please make sure to change it to the file path on your own computer.
+```
 
-**Option A — MySQL Workbench (recommended):**
-1. Open MySQL Workbench
-2. File → Open SQL Script → select `code/group6_insert_sql.txt`
-3. Press `Ctrl+Shift+Enter` to execute all
-
-**Option B — Command Prompt (cmd.exe, NOT PowerShell, Please make sure to change it to the file path on your own computer):**
+**Option A — Command Prompt (cmd.exe, NOT PowerShell):**
+```diff
+- You need to find the source file list according to the file path on your own:
+- bin\mysql.exe , code\group6_insert_sql.txt
+```
 ```cmd
 "C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe" -u root -p < code\group6_insert_sql.txt
 ```
 
-**Option C — PowerShell** (run from project root directory, Please make sure to change it to the file path on your own computer):
+**Option B — PowerShell** (run from project root directory):
+```diff
+- You need to find the source file list according to the file path on your own:
+- COMP7640 Group_Project , code\group6_insert_sql.txt , bin\mysql.exe
+```
 ```powershell
 cd "C:\Users\26764\Desktop\COMP7640 Group_Project"
 Get-Content "code\group6_insert_sql.txt" | & "C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe" -u root -p
