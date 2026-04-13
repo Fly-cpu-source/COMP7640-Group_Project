@@ -43,7 +43,7 @@ Run `code/group6_insert_sql.txt` to create the database, all tables, constraints
 
 **Option A — Command Prompt (cmd.exe, NOT PowerShell):**
 
-Press Win+R, type CMD to enter, locate the path of \bin\mysql.exe and the path of \code\group6_insert_sql.txt on your computer, and add them to the code line as prompted.
+Press Win+R, type CMD to enter, locate the path of **\bin\mysql.exe** and the path of **\code\group6_insert_sql.txt** on your computer, and add them to the code line as prompted.
 
 ```cmd
 "C:\Users\ZhuanZ1\Downloads\mysql-9.6.0-winx64\bin\mysql.exe" -u root -p < C:\Users\ZhuanZ1\Desktop\code\group6_insert_sql.txt
@@ -51,10 +51,9 @@ Press Win+R, type CMD to enter, locate the path of \bin\mysql.exe and the path o
 
 **Option B — PowerShell (run from project root directory):**
 
-Press Win+R, type PowerShell to enter, locate the paths of COMP7640-Group_Project, \code\group6_insert_sql.txt, and \bin\mysql.exe on your computer, and add them to the prompted code line.
+Press Win+R, type PowerShell to enter, locate the path of **\code\group6_insert_sql.txt** and the path of **\bin\mysql.exe** on your computer, and add them to the prompted code line.
 
 ```powershell
-cd "C:\Users\ZhuanZ1\Downloads\COMP7640-Group_Project-master"
 Get-Content "C:\Users\ZhuanZ1\Desktop\code\group6_insert_sql.txt" | & "C:\Users\ZhuanZ1\Downloads\mysql-9.6.0-winx64\bin\mysql.exe" -u root -p
 ```
 
