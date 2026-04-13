@@ -42,22 +42,20 @@ Run `code/group6_insert_sql.txt` to create the database, all tables, constraints
 ```
 
 **Option A — Command Prompt (cmd.exe, NOT PowerShell):**
-```diff
-- You need to find the source file list according to the file path on your own:
-- bin\mysql.exe , code\group6_insert_sql.txt
-```
+
+Press Win+R, type CMD to enter, locate the path of \bin\mysql.exe and the path of \code\group6_insert_sql.txt on your computer, and add them to the code line as prompted.
+
 ```cmd
-"C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe" -u root -p < code\group6_insert_sql.txt
+"C:\Users\ZhuanZ1\Downloads\mysql-9.6.0-winx64\bin\mysql.exe" -u root -p < C:\Users\ZhuanZ1\Desktop\code\group6_insert_sql.txt
 ```
 
-**Option B — PowerShell** (run from project root directory):
-```diff
-- You need to find the source file list according to the file path on your own:
-- COMP7640 Group_Project , code\group6_insert_sql.txt , bin\mysql.exe
-```
+**Option B — PowerShell (run from project root directory):**
+
+Press Win+R, type PowerShell to enter, locate the paths of COMP7640-Group_Project, \code\group6_insert_sql.txt, and \bin\mysql.exe on your computer, and add them to the prompted code line.
+
 ```powershell
-cd "C:\Users\26764\Desktop\COMP7640 Group_Project"
-Get-Content "code\group6_insert_sql.txt" | & "C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe" -u root -p
+cd "C:\Users\ZhuanZ1\Downloads\COMP7640-Group_Project-master"
+Get-Content "C:\Users\ZhuanZ1\Desktop\code\group6_insert_sql.txt" | & "C:\Users\ZhuanZ1\Downloads\mysql-9.6.0-winx64\bin\mysql.exe" -u root -p
 ```
 
 This creates the `remarket` database with 6 tables and the following sample data:
@@ -78,9 +76,9 @@ To reset the database to its original state, re-run the same SQL file (it drops 
 ## 4. How to Run
 
 ### Graphical Interface (GUI)
-
+After writing the code, press enter, input the password, then locate the \code\Frontend path on your computer and enter it using cd.
 ```bash
-cd code/Frontend
+cd C:\Users\ZhuanZ1\Desktop\code\Frontend
 python gui.py
 ```
 
