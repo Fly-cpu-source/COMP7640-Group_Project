@@ -143,15 +143,9 @@ COMP7640 Group_Project/
 │   │   └── transaction.py         # Transaction DAO — create, delete
 │   └── Frontend/
 │       └── gui.py                 # GUI entry point (tkinter)
-└── E-R Diagram.pdf
-```
 
----
 
-## 7. Demo Checklist
 
-The following must be demonstrated during the project demo:
 
-- [ ] **Search** — enter a keyword, verify fuzzy results appear
-- [ ] **Place Order** — select customer, add products to cart, confirm
-- [ ] **Modify Order** — delete an item from a pending order, or cancel the entire order
+
+
