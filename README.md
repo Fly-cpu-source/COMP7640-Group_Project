@@ -2,7 +2,7 @@
 
 **COMP7640 Group 6 | Database Project**
 
-A multi-vendor, multi-customer e-commerce platform for second-hand goods, built with Python and MySQL. Supports vendor management, product management, fuzzy tag search, order placement, and order modification.
+A multi-vendor and multi-customer e-commerce platform for second-hand goods, built with Python and MySQL. Supports vendor management, product management, fuzzy tag search, order placement, and order modification.
 
 ---
 
@@ -46,7 +46,7 @@ Run `code/group6_insert_sql.txt` to create the database, all tables, constraints
 Press Win+R, type CMD to enter, locate the path of **\bin\mysql.exe** and the path of **\code\group6_insert_sql.txt** on your computer, and add them to the code line as prompted.
 
 ```cmd
-"C:\Users\ZhuanZ1\Downloads\mysql-9.6.0-winx64\bin\mysql.exe" -u root -p < C:\Users\ZhuanZ1\Desktop\code\group6_insert_sql.txt
+"C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe" -u root -p < C:\Users\26764\Desktop\group6_project\code\group6_insert_sql.txt
 ```
 
 **Option B — PowerShell (run from project root directory):**
@@ -54,7 +54,7 @@ Press Win+R, type CMD to enter, locate the path of **\bin\mysql.exe** and the pa
 Press Win+R, type PowerShell to enter, locate the path of **\code\group6_insert_sql.txt** and the path of **\bin\mysql.exe** on your computer, and add them to the prompted code line.
 
 ```powershell
-Get-Content "C:\Users\ZhuanZ1\Desktop\code\group6_insert_sql.txt" | & "C:\Users\ZhuanZ1\Downloads\mysql-9.6.0-winx64\bin\mysql.exe" -u root -p
+Get-Content "C:\Users\26764\Desktop\group6_project\code\group6_insert_sql.txt" | & "C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe" -u root -p
 ```
 
 This creates the `remarket` database with 6 tables and the following sample data:
@@ -77,7 +77,7 @@ To reset the database to its original state, re-run the same SQL file (it drops 
 ### Graphical Interface (GUI)
 After writing the code, press enter, input the password, then locate the \code\Frontend path on your computer and enter it using cd.
 ```bash
-cd C:\Users\ZhuanZ1\Desktop\code\Frontend
+cd C:\Users\26764\Desktop\group6_project\code\Frontend
 python gui.py
 ```
 
@@ -142,7 +142,7 @@ COMP7640 Group_Project/
 │   │   ├── order.py               # Order DAO — place, delete item, cancel
 │   │   └── transaction.py         # Transaction DAO — create, delete
 │   └── Frontend/
-│       └── gui.py                 # GUI entry point (tkinter)
+│       └── gui.py                 # GUI 
 
 
 
