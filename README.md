@@ -113,8 +113,7 @@ A window will open with 5 tabs covering all functional points.
 |--------|-----|
 | Select customer, add items to cart, confirm order | Purchase tab |
 
-- Stock is validated before order is confirmed
-- If items span multiple vendors, one Transaction record is created per vendor
+Stock is validated before order is confirmed. If items span multiple vendors, one Transaction record is created per vendor
 
 ### ⑤ Order Modification
 | Action | GUI |
@@ -122,8 +121,7 @@ A window will open with 5 tabs covering all functional points.
 | Delete a specific product from a pending order | Order Modify tab → Load Order → Delete Selected Item |
 | Cancel entire order (pending orders only) | Order Modify tab → Load Order → Cancel Entire Order |
 
-- Cancelling an order restores stock and removes all related Transaction records
-- Shipped orders cannot be cancelled
+Cancelling an order restores stock and removes all related Transaction records. Shipped orders cannot be cancelled
 
 ---
 
