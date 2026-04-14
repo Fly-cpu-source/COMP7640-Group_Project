@@ -46,7 +46,7 @@ Run `code/group6_insert_sql.txt` to create the database, all tables, constraints
 Press Win+R, type CMD to enter, locate the path of **\bin\mysql.exe** and the path of **\code\group6_insert_sql.txt** on your computer, and add them to the code line as prompted.
 
 ```cmd
-"C:\Users\ZhuanZ1\Downloads\mysql-9.6.0-winx64\bin\mysql.exe" -u root -p < C:\Users\ZhuanZ1\Desktop\code\group6_insert_sql.txt
+"C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe" -u root -p < C:\Users\26764\Desktop\group6_project\code\group6_insert_sql.txt
 ```
 
 **Option B — PowerShell (run from project root directory):**
